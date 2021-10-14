@@ -26,6 +26,19 @@ const App = () => {
     });   
     
   }
+  function reset(){
+    setState({
+      player:'CIRCLE',              
+        positions:[
+          'EMPTY','EMPTY','EMPTY',
+          'EMPTY','EMPTY','EMPTY',
+          'EMPTY','EMPTY','EMPTY'
+        ]
+
+      })      
+
+     }      
+
   function detectWinner(p){
 
     if(p[0]==='CIRCLE' && p[1]==='CIRCLE' && p[2]==='CIRCLE') return "CIRCLE";
@@ -40,39 +53,20 @@ const App = () => {
     if(p[2]==='CIRCLE' && p[4]==='CIRCLE' && p[6]==='CIRCLE')return "CIRCLE";
   
     
-     if(p[0]==='CROSS' && p[1]==='CROSS' && p[2]==='CROSS')return "CROSS";;
-    if(p[3]==='CROSS' && p[4]==='CROSS' && p[5]==='CROSS')return "CROSS";;
-    if(p[6]==='CROSS' && p[7]==='CROSS' && p[8]==='CROSS')return "CROSS";;
+     if(p[0]==='CROSS' && p[1]==='CROSS' && p[2]==='CROSS')return "CROSS";
+    if(p[3]==='CROSS' && p[4]==='CROSS' && p[5]==='CROSS')return "CROSS";
+    if(p[6]==='CROSS' && p[7]==='CROSS' && p[8]==='CROSS')return "CROSS";
 
-    if(p[0]==='CROSS' && p[3]==='CROSS' && p[6]==='CROSS')return "CROSS";;
-    if(p[1]==='CROSS' && p[4]==='CROSS' && p[7]==='CROSS')return "CROSS";;
-    if(p[2]==='CROSS' && p[5]==='CROSS' && p[8]==='CROSS')return "CROSS";;
+    if(p[0]==='CROSS' && p[3]==='CROSS' && p[6]==='CROSS')return "CROSS";
+    if(p[1]==='CROSS' && p[4]==='CROSS' && p[7]==='CROSS')return "CROSS";
+    if(p[2]==='CROSS' && p[5]==='CROSS' && p[8]==='CROSS')return "CROSS";
   
-    if(p[0]==='CROSS' && p[4]==='CROSS' && p[8]==='CROSS')return "CROSS";;
-    if(p[2]==='CROSS' && p[4]==='CROSS' && p[6]==='CROSS')return "CROSS";; 
-  
+    if(p[0]==='CROSS' && p[4]==='CROSS' && p[8]==='CROSS')return "CROSS";
+    if(p[2]==='CROSS' && p[4]==='CROSS' && p[6]==='CROSS')return "CROSS";  
 
-    //  if(p.every(position => position!=='EMPTY')) return'it is a tie';
+    //  if (p.every(position => position=='EMPTY')) return "it is a tie";
   }
-   function reset(){
-     setState({
-       player:'CRICLE',
-       positions:[{
-         player:'CIRCLE',
-         positions:[
-           'EMPTY','EMPTY','EMPTY',
-           'EMPTY','EMPTY','EMPTY',
-           'EMPTY','EMPTY','EMPTY'
-         ]
-
-       }
-       ,
-
-       ]       
-
-     })
-   }
-
+  
   const winner=detectWinner(state.positions);  
  
   return (
@@ -86,8 +80,7 @@ const App = () => {
         <Square position={5} value={state.positions[5]} taketurn={TakeTurn} />
         <Square position={6} value={state.positions[6]} taketurn={TakeTurn} />
         <Square position={7} value={state.positions[7]} taketurn={TakeTurn} />
-        <Square position={8} value={state.positions[8]} taketurn={TakeTurn} />
-        
+        <Square position={8} value={state.positions[8]} taketurn={TakeTurn} />        
       </div>
       { winner && <Result  winner={winner} reset={reset}/>}
     </div>
