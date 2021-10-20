@@ -2,20 +2,22 @@ import React, { useState } from "react";
 import "./App.css";
 import Square from "./component/Square";
 import Result from "./component/Result";
+
 const App = () => {
   const [state, setState] = useState({
-    player: "CIRCLE",
-    positions: [
-      "EMPTY",
-      "EMPTY",
-      "EMPTY",
-      "EMPTY",
-      "EMPTY",
-      "EMPTY",
-      "EMPTY",
-      "EMPTY",
-      "EMPTY",
-    ],
+    player: "CIRCLE",positions:Array(9).fill("EMPTY")
+
+    // positions: [
+    //   "EMPTY",
+    //   "EMPTY",
+    //   "EMPTY",
+    //   "EMPTY",
+    //   "EMPTY",
+    //   "EMPTY",
+    //   "EMPTY",
+    //   "EMPTY",
+    //   "EMPTY",
+    // ],
   });
   function TakeTurn(position) {
     const positions = { ...state.positions };
@@ -28,19 +30,20 @@ const App = () => {
   }
   function reset(){
     setState({
-      player:'CIRCLE',              
-        positions:[
-          'EMPTY','EMPTY','EMPTY',
-          'EMPTY','EMPTY','EMPTY',
-          'EMPTY','EMPTY','EMPTY'
-        ]
+      player:'CIRCLE',       
+      positions:Array(9).fill("EMPTY")
+        // positions:[
+        //   'EMPTY','EMPTY','EMPTY',
+        //   'EMPTY','EMPTY','EMPTY',
+        //   'EMPTY','EMPTY','EMPTY'
+        // ]
 
       })      
 
      }      
 
-  function detectWinner(p){
-
+  function detectWinner(p){   
+      
     if(p[0]==='CIRCLE' && p[1]==='CIRCLE' && p[2]==='CIRCLE') return "CIRCLE";
     if(p[6]==='CIRCLE' && p[7]==='CIRCLE' && p[8]==='CIRCLE')return "CIRCLE";
     
@@ -62,9 +65,8 @@ const App = () => {
     if(p[2]==='CROSS' && p[5]==='CROSS' && p[8]==='CROSS')return "CROSS";
   
     if(p[0]==='CROSS' && p[4]==='CROSS' && p[8]==='CROSS')return "CROSS";
-    if(p[2]==='CROSS' && p[4]==='CROSS' && p[6]==='CROSS')return "CROSS";  
-
-    //  if (p.every(position => position=='EMPTY')) return "it is a tie";
+    if(p[2]==='CROSS' && p[4]==='CROSS' && p[6]==='CROSS')return "CROSS";
+    //   if (p.every(position => position!=='EMPTY')) return "it is a tie";
   }
   
   const winner=detectWinner(state.positions);  
@@ -80,9 +82,17 @@ const App = () => {
         <Square position={5} value={state.positions[5]} taketurn={TakeTurn} />
         <Square position={6} value={state.positions[6]} taketurn={TakeTurn} />
         <Square position={7} value={state.positions[7]} taketurn={TakeTurn} />
-        <Square position={8} value={state.positions[8]} taketurn={TakeTurn} />        
+        <Square position={8} value={state.positions[8]} taketurn={TakeTurn} />    
+         
       </div>
-      { winner && <Result  winner={winner} reset={reset}/>}
+      <div className="result">
+          {winner==="CIRCLE" && "Circle won the game"}
+          {winner==="CROSS" && "Cross won the game"}
+          {winner==='it is a tie' && 'it is a tie'}
+          
+      <button onClick={reset} className="btn">Reset</button>        
+      {/* { winner && <Result  winner={winner} reset={reset}/>}   */}
+      </div>
     </div>
   );
 };
